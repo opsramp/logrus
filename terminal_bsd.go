@@ -5,12 +5,12 @@ package logrus
 
 import "golang.org/x/sys/unix"
 
-Import “syscall”
-
 const ioctlReadTermios = unix.TIOCGETA
 
 type Termios unix.Termios
 
 func GetCurrentThreadId() int {
-	return syscall.Gettid()
+	//Since FreeBSD does not have a systemcall for thread id as of now. We are using process id instead
+	return unix.Getpid()
 }
+
